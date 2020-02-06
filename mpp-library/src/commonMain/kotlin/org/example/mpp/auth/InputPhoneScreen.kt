@@ -21,6 +21,7 @@ import org.example.library.MR
 
 class InputPhoneScreen (
     private val theme: Theme,
+    private val submitButtons: ButtonWidget.Category,
     private val viewModelFactory: (
         EventsDispatcher<InputPhoneViewModel.EventsListener>
     ) -> InputPhoneViewModel,
@@ -45,6 +46,7 @@ class InputPhoneScreen (
             )
 
             val submitButton = +button(
+                category = submitButtons,
                 size = WidgetSize.WidthAsParentHeightWrapContent,
                 content = ButtonWidget.Content.Text(Value.data("Submit".desc())),
                 onTap = viewModel::onSubmitPressed

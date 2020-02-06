@@ -56,7 +56,7 @@ object Versions {
             const val mokoUnits = Versions.mokoUnits
             const val mokoWidgets = Versions.mokoWidgets
 
-            const val napier = "1.1.0"
+            const val napier = "1.0.0"
             const val settings = "0.5"
         }
     }

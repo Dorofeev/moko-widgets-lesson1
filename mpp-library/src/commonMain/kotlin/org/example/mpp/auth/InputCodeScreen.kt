@@ -15,6 +15,7 @@ import dev.icerock.moko.widgets.style.view.WidgetSize
 
 class InputCodeScreen(
     private val theme: Theme,
+    private val submitButtons: ButtonWidget.Category,
     private val viewModelFactory: (
         eventsDispatcher: EventsDispatcher<InputCodeViewModel.EventsListener>,
         token: String
@@ -41,6 +42,7 @@ class InputCodeScreen(
             )
 
             val submitButton = +button(
+                category = submitButtons,
                 size = WidgetSize.WidthAsParentHeightWrapContent,
                 content = ButtonWidget.Content.Text(Value.data("Submit".desc())),
                 onTap = viewModel::onSubmitPressed

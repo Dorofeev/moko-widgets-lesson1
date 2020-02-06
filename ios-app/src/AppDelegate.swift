@@ -19,7 +19,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
+        window?.tintColor = UIColor(red:1.00, green:0.74, blue:0.27, alpha:1.0)
         window?.makeKeyAndVisible()
+        
 
         return true
     }
