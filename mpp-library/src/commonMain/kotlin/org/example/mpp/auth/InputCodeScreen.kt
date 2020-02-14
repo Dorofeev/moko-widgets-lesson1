@@ -11,6 +11,7 @@ import dev.icerock.moko.widgets.screen.*
 import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.screen.navigation.NavigationItem
 import dev.icerock.moko.widgets.screen.navigation.Route
+import dev.icerock.moko.widgets.screen.navigation.route
 import dev.icerock.moko.widgets.style.view.WidgetSize
 
 class InputCodeScreen(
@@ -63,7 +64,7 @@ class InputCodeScreen(
     }
 
     override fun routeMain() {
-        routeMain.route(this, Unit)
+        routeMain.route()
     }
 
     @Parcelize

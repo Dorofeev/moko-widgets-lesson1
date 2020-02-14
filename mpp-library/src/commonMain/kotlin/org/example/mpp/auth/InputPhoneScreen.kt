@@ -14,9 +14,10 @@ import dev.icerock.moko.widgets.screen.*
 import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.screen.navigation.NavigationItem
 import dev.icerock.moko.widgets.screen.navigation.Route
+import dev.icerock.moko.widgets.screen.navigation.route
 import dev.icerock.moko.widgets.style.view.WidgetSize
 import org.example.library.MR
-import org.example.mpp.openUrl
+import org.example.mpp.*
 
 class InputPhoneScreen (
     private val theme: Theme,
@@ -28,6 +29,19 @@ class InputPhoneScreen (
 ) : WidgetScreen<Args.Empty>(), InputPhoneViewModel.EventsListener, NavigationItem {
 
     override val navigationBar: NavigationBar get() = NavigationBar.Normal("Input phone".desc())
+
+    private val openUrlDialogHandler by registerDialogButtonsHandler(
+        onPositivePressed = {
+            showToast("positive from $it".desc())
+        },
+        onNegativePressed = {
+            showToast("negative from $it".desc())
+        }
+    )
+
+    private val phonePickerHandler by registerPhonePickerHandler(9) {
+        showToast("picked $it".desc())
+    }
 
     override fun createContentWidget() = with(theme) {
         val viewModel = getViewModel {
@@ -57,6 +71,12 @@ class InputPhoneScreen (
                 onTap = ::onGitHubPressed
             )
 
+            val aboutButton = +button(
+                size = WidgetSize.WrapContent,
+                content = ButtonWidget.Content.Text(Value.data("About".desc())),
+                onTap = ::onAboutPressed
+            )
+
             constraints {
                 nameInput centerYToCenterY root
                 nameInput leftRightToLeftRight root offset 16
@@ -64,22 +84,35 @@ class InputPhoneScreen (
                 submitButton bottomToBottom root.safeArea offset 16
                 submitButton leftRightToLeftRight root offset 16
 
-                githubButton centerXToCenterX root
+                githubButton rightToRight root offset 16
                 githubButton topToTop root.safeArea offset 16
+
+                aboutButton rightToLeft githubButton offset 8
+                aboutButton topToTop githubButton
             }
         }
     }
 
+    private fun onGitHubPressed() {
+        showPhonePicker(phonePickerHandler)
+    }
+
+    private fun onAboutPressed() {
+        showDialog(
+            dialogId = 2,
+            title = "Question 2".desc(),
+            message = "No or yes?".desc(),
+            positiveButton = "No".desc(),
+            negativeButton = "Yes".desc(),
+            buttonsHandler = openUrlDialogHandler
+        )
+    }
     override fun routeInputCode(token: String) {
-        routeInputCode.route(this, token)
+        routeInputCode.route(token)
     }
 
     override fun showError(error: StringDesc) {
         showToast(error)
-    }
-
-    private fun onGitHubPressed() {
-        openUrl("https://github.com/icerockdev/moko-widgets")
     }
 
     object Ids {
