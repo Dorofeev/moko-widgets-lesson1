@@ -6,6 +6,7 @@ import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcherOwner
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.desc.desc
 
 class InputPhoneViewModel(
     override val eventsDispatcher: EventsDispatcher<EventsListener>
@@ -17,11 +18,17 @@ class InputPhoneViewModel(
     )
 
     fun onSubmitPressed() {
-        val token = "token:" + phoneField.data.value
+        val phone = phoneField.data.value
+        if(phone.isBlank()) {
+            eventsDispatcher.dispatchEvent { showError("it's cant be blank!".desc()) }
+            return
+        }
+        val token = "token:$phone"
         eventsDispatcher.dispatchEvent { routeInputCode(token) }
     }
 
     interface EventsListener {
         fun routeInputCode(token: String)
+        fun showError(error: StringDesc)
     }
 }

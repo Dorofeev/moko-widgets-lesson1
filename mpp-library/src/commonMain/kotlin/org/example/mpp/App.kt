@@ -71,7 +71,7 @@ class App : BaseApplication() {
                 textStyle = TextStyle(color = Colors.white, size = 15)
             )
             factory[InputPhoneScreen.Ids.Name] = SystemInputViewFactory(
-                labelTextStyle = TextStyle(color = Colors.orangeDark)
+                textStyle = TextStyle(color = Colors.orangeDark)
             )
         }
         val profileTheme = Theme(parent = theme) {

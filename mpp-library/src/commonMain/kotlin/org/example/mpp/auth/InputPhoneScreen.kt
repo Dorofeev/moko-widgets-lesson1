@@ -5,19 +5,18 @@
 package org.example.mpp.auth
 
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
+import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.moko.widgets.*
 import dev.icerock.moko.widgets.core.Theme
 import dev.icerock.moko.widgets.core.Value
-import dev.icerock.moko.widgets.screen.Args
-import dev.icerock.moko.widgets.screen.WidgetScreen
-import dev.icerock.moko.widgets.screen.getViewModel
-import dev.icerock.moko.widgets.screen.listen
+import dev.icerock.moko.widgets.screen.*
 import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.screen.navigation.NavigationItem
 import dev.icerock.moko.widgets.screen.navigation.Route
 import dev.icerock.moko.widgets.style.view.WidgetSize
 import org.example.library.MR
+import org.example.mpp.openUrl
 
 class InputPhoneScreen (
     private val theme: Theme,
@@ -52,18 +51,35 @@ class InputPhoneScreen (
                 onTap = viewModel::onSubmitPressed
             )
 
+            val githubButton = +button(
+                size = WidgetSize.WrapContent,
+                content = ButtonWidget.Content.Text(Value.data("GitHub".desc())),
+                onTap = ::onGitHubPressed
+            )
+
             constraints {
                 nameInput centerYToCenterY root
                 nameInput leftRightToLeftRight root offset 16
 
                 submitButton bottomToBottom root.safeArea offset 16
                 submitButton leftRightToLeftRight root offset 16
+
+                githubButton centerXToCenterX root
+                githubButton topToTop root.safeArea offset 16
             }
         }
     }
 
     override fun routeInputCode(token: String) {
         routeInputCode.route(this, token)
+    }
+
+    override fun showError(error: StringDesc) {
+        showToast(error)
+    }
+
+    private fun onGitHubPressed() {
+        openUrl("https://github.com/icerockdev/moko-widgets")
     }
 
     object Ids {
