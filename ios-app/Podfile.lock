@@ -1,8 +1,14 @@
 PODS:
   - MultiPlatformLibrary (0.1.0)
+  - SVPinView (1.0.7)
 
 DEPENDENCIES:
   - MultiPlatformLibrary (from `../mpp-library`)
+  - SVPinView (= 1.0.7)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - SVPinView
 
 EXTERNAL SOURCES:
   MultiPlatformLibrary:
@@ -10,7 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   MultiPlatformLibrary: 176fb8ade516666cd47e93de1b71ba0441a541bb
+  SVPinView: 6c1da57e4a1273298802f460c60511ba10f7c831
 
-PODFILE CHECKSUM: 63b5ed76cdbb03444075658b711a30de4d225fc7
+PODFILE CHECKSUM: 6b303fb72fddb897ccf0b1514ab8a68c0c0752bc
 
 COCOAPODS: 1.8.4

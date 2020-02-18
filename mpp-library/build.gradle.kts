@@ -33,12 +33,19 @@ dependencies {
     mppLibrary(Deps.Libs.MultiPlatform.coroutines)
 
     androidLibrary(Deps.Libs.Android.lifecycle)
+    androidLibrary(Deps.Libs.Android.otpView)
 
     mppLibs.forEach { mppLibrary(it) }
 }
 
 multiplatformResources {
     multiplatformResourcesPackage = "org.example.library"
+}
+
+cocoaPods {
+    podsProject = file("../ios-app/Pods/Pods.xcodeproj")
+
+    pod("SVPinView")
 }
 
 // dependencies graph generator
